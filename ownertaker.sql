@@ -1,5 +1,3 @@
-DROP TABLE IF EXISTS Owners
-DROP TABLE IF EXISTS Caretakers
 -- Owner table:
 CREATE TABLE Owners (
 	oname VARCHAR(10),
@@ -49,35 +47,36 @@ CREATE TABLE Caretakers (
 	PRIMARY KEY (cname, pkind)
 );
 
-INSERT INTO Caretakers (oname, startdate, enddate, pkind, contactNumber)
+INSERT INTO Caretakers (cname, startdate, enddate, pkind, contactNumber)
 VALUES ('Lucy', '2018-06-04', '2018-06-05','Keeshond', '87658876');
 
-INSERT INTO Caretakers (oname, startdate, enddate, pkind, contactNumber)
+INSERT INTO Caretakers (cname, startdate, enddate, pkind, contactNumber)
 VALUES ('Marry', '2018-06-04', '2018-06-08','Harrier', '87762432');
 
-INSERT INTO Caretakers (oname, startdate, enddate, pkind, contactNumber)
+INSERT INTO Caretakers (cname, startdate, enddate, pkind, contactNumber)
 VALUES ('Naughty', '2018-06-05', '2018-12-09','Spitz', '87763235');
 
-INSERT INTO Caretakers (oname, startdate, enddate, pkind, contactNumber)
+INSERT INTO Caretakers (cname, startdate, enddate, pkind, contactNumber)
 VALUES ('Nur', '2018-07-21', '2018-08-01','Pinscher', '92137883');
 
-INSERT INTO Caretakers (oname, startdate, enddate, pkind, contactNumber)
+INSERT INTO Caretakers (cname, startdate, enddate, pkind, contactNumber)
 VALUES ('Peter', '2018-08-04', '2019-02-04','Cocker', '92237889');
 
-INSERT INTO Caretakers (oname, startdate, enddate, pkind, contactNumber)
+INSERT INTO Caretakers (cname, startdate, enddate, pkind, contactNumber)
 VALUES ('Quota', '2018-06-09', '2018-09-05','Cannan', '89102362');
 
-INSERT INTO Caretakers (oname, startdate, enddate, pkind, contactNumber)
+INSERT INTO Caretakers (cname, startdate, enddate, pkind, contactNumber)
 VALUES ('Raffles', '2018-07-04', '2018-10-05','Malamute', '82536889');
 
-INSERT INTO Caretakers (oname, startdate, enddate, pkind, contactNumber)
+INSERT INTO Caretakers (cname, startdate, enddate, pkind, contactNumber)
 VALUES ('Richard', '2019-01-04', '2019-05-05','Akita', '89226332');
 
-INSERT INTO Caretakers (oname, startdate, enddate, pkind, contactNumber)
+INSERT INTO Caretakers (cname, startdate, enddate, pkind, contactNumber)
 VALUES ('Stephen', '2018-08-04', '2018-08-05','Bulldog', '89962234');
 
-INSERT INTO Caretakers (oname, startdate, enddate, pkind, contactNumber)
+INSERT INTO Caretakers (cname, startdate, enddate, pkind, contactNumber)
 VALUES ('Tim', '2018-07-05', '2018-12-05','Eskimo', '68823113');
 
 -- Requests: TO BE CREATED
+
 
