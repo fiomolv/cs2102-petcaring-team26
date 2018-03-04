@@ -1,3 +1,7 @@
+DROP TABLE IF EXISTS Owners;
+DROP TABLE IF EXISTS Caretakers;
+DROP TABLE IF EXISTS Requests;
+
 -- Owner table:
 CREATE TABLE Owners (
 	oid INTEGER,
@@ -89,4 +93,302 @@ CREATE TABLE Requests (
 	FOREIGN KEY (cid) REFERENCES Caretakers(cid)
 );
 
+INSERT INTO Requests (oid, cid, status)
+VALUES (1, 1, CAST(0 AS BIT));
 
+INSERT INTO Requests (oid, cid, status)
+VALUES (2, 1, CAST(0 AS BIT));
+
+INSERT INTO Requests (oid, cid, status)
+VALUES (3, 1, CAST(0 AS BIT));
+
+INSERT INTO Requests (oid, cid, status)
+VALUES (4, 1, CAST(0 AS BIT));
+
+INSERT INTO Requests (oid, cid, status)
+VALUES (5, 1, CAST(0 AS BIT));
+
+INSERT INTO Requests (oid, cid, status)
+VALUES (6, 1, CAST(0 AS BIT));
+
+INSERT INTO Requests (oid, cid, status)
+VALUES (7, 1, CAST(0 AS BIT));
+
+INSERT INTO Requests (oid, cid, status)
+VALUES (8, 1, CAST(0 AS BIT));
+
+INSERT INTO Requests (oid, cid, status)
+VALUES (9, 1, CAST(0 AS BIT));
+
+INSERT INTO Requests (oid, cid, status)
+VALUES (10, 1, CAST(1 AS BIT));
+
+INSERT INTO Requests (oid, cid, status)
+VALUES (1, 2, CAST(0 AS BIT));
+
+INSERT INTO Requests (oid, cid, status)
+VALUES (2, 2, CAST(0 AS BIT));
+
+INSERT INTO Requests (oid, cid, status)
+VALUES (3, 2, CAST(0 AS BIT));
+
+INSERT INTO Requests (oid, cid, status)
+VALUES (4, 2, CAST(0 AS BIT));
+
+INSERT INTO Requests (oid, cid, status)
+VALUES (5, 2, CAST(0 AS BIT));
+
+INSERT INTO Requests (oid, cid, status)
+VALUES (6, 2, CAST(0 AS BIT));
+
+INSERT INTO Requests (oid, cid, status)
+VALUES (7, 2, CAST(0 AS BIT));
+
+INSERT INTO Requests (oid, cid, status)
+VALUES (8, 2, CAST(0 AS BIT));
+
+INSERT INTO Requests (oid, cid, status)
+VALUES (9, 2, CAST(1 AS BIT));
+
+INSERT INTO Requests (oid, cid, status)
+VALUES (10, 2, CAST(0 AS BIT));
+
+INSERT INTO Requests (oid, cid, status)
+VALUES (1, 3, CAST(0 AS BIT));
+
+INSERT INTO Requests (oid, cid, status)
+VALUES (2, 3, CAST(0 AS BIT));
+
+INSERT INTO Requests (oid, cid, status)
+VALUES (3, 3, CAST(0 AS BIT));
+
+INSERT INTO Requests (oid, cid, status)
+VALUES (4, 3, CAST(0 AS BIT));
+
+INSERT INTO Requests (oid, cid, status)
+VALUES (5, 3, CAST(0 AS BIT));
+
+INSERT INTO Requests (oid, cid, status)
+VALUES (6, 3, CAST(0 AS BIT));
+
+INSERT INTO Requests (oid, cid, status)
+VALUES (7, 3, CAST(0 AS BIT));
+
+INSERT INTO Requests (oid, cid, status)
+VALUES (8, 3, CAST(1 AS BIT));
+
+INSERT INTO Requests (oid, cid, status)
+VALUES (9, 3, CAST(0 AS BIT));
+
+INSERT INTO Requests (oid, cid, status)
+VALUES (10, 3, CAST(0 AS BIT));
+
+INSERT INTO Requests (oid, cid, status)
+VALUES (1, 4, CAST(0 AS BIT));
+
+INSERT INTO Requests (oid, cid, status)
+VALUES (2, 4, CAST(0 AS BIT));
+
+INSERT INTO Requests (oid, cid, status)
+VALUES (3, 4, CAST(0 AS BIT));
+
+INSERT INTO Requests (oid, cid, status)
+VALUES (4, 4, CAST(0 AS BIT));
+
+INSERT INTO Requests (oid, cid, status)
+VALUES (5, 4, CAST(0 AS BIT));
+
+INSERT INTO Requests (oid, cid, status)
+VALUES (6, 4, CAST(0 AS BIT));
+
+INSERT INTO Requests (oid, cid, status)
+VALUES (7, 4, CAST(1 AS BIT));
+
+INSERT INTO Requests (oid, cid, status)
+VALUES (8, 4, CAST(0 AS BIT));
+
+INSERT INTO Requests (oid, cid, status)
+VALUES (9, 4, CAST(0 AS BIT));
+
+INSERT INTO Requests (oid, cid, status)
+VALUES (10, 4, CAST(0 AS BIT));
+
+INSERT INTO Requests (oid, cid, status)
+VALUES (1, 5, CAST(0 AS BIT));
+
+INSERT INTO Requests (oid, cid, status)
+VALUES (2, 5, CAST(0 AS BIT));
+
+INSERT INTO Requests (oid, cid, status)
+VALUES (3, 5, CAST(0 AS BIT));
+
+INSERT INTO Requests (oid, cid, status)
+VALUES (4, 5, CAST(0 AS BIT));
+
+INSERT INTO Requests (oid, cid, status)
+VALUES (5, 5, CAST(0 AS BIT));
+
+INSERT INTO Requests (oid, cid, status)
+VALUES (6, 5, CAST(1 AS BIT));
+
+INSERT INTO Requests (oid, cid, status)
+VALUES (7, 5, CAST(0 AS BIT));
+
+INSERT INTO Requests (oid, cid, status)
+VALUES (8, 5, CAST(0 AS BIT));
+
+INSERT INTO Requests (oid, cid, status)
+VALUES (9, 5, CAST(0 AS BIT));
+
+INSERT INTO Requests (oid, cid, status)
+VALUES (10, 5, CAST(0 AS BIT));
+
+INSERT INTO Requests (oid, cid, status)
+VALUES (1, 6, CAST(0 AS BIT));
+
+INSERT INTO Requests (oid, cid, status)
+VALUES (2, 6, CAST(0 AS BIT));
+
+INSERT INTO Requests (oid, cid, status)
+VALUES (3, 6, CAST(0 AS BIT));
+
+INSERT INTO Requests (oid, cid, status)
+VALUES (4, 6, CAST(0 AS BIT));
+
+INSERT INTO Requests (oid, cid, status)
+VALUES (5, 6, CAST(1 AS BIT));
+
+INSERT INTO Requests (oid, cid, status)
+VALUES (6, 6, CAST(0 AS BIT));
+
+INSERT INTO Requests (oid, cid, status)
+VALUES (7, 6, CAST(0 AS BIT));
+
+INSERT INTO Requests (oid, cid, status)
+VALUES (8, 6, CAST(0 AS BIT));
+
+INSERT INTO Requests (oid, cid, status)
+VALUES (9, 6, CAST(0 AS BIT));
+
+INSERT INTO Requests (oid, cid, status)
+VALUES (10, 6, CAST(0 AS BIT));
+
+INSERT INTO Requests (oid, cid, status)
+VALUES (1, 7, CAST(0 AS BIT));
+
+INSERT INTO Requests (oid, cid, status)
+VALUES (2, 7, CAST(0 AS BIT));
+
+INSERT INTO Requests (oid, cid, status)
+VALUES (3, 7, CAST(0 AS BIT));
+
+INSERT INTO Requests (oid, cid, status)
+VALUES (4, 7, CAST(1 AS BIT));
+
+INSERT INTO Requests (oid, cid, status)
+VALUES (5, 7, CAST(0 AS BIT));
+
+INSERT INTO Requests (oid, cid, status)
+VALUES (6, 7, CAST(0 AS BIT));
+
+INSERT INTO Requests (oid, cid, status)
+VALUES (7, 7, CAST(0 AS BIT));
+
+INSERT INTO Requests (oid, cid, status)
+VALUES (8, 7, CAST(0 AS BIT));
+
+INSERT INTO Requests (oid, cid, status)
+VALUES (9, 7, CAST(0 AS BIT));
+
+INSERT INTO Requests (oid, cid, status)
+VALUES (10, 7, CAST(0 AS BIT));
+
+INSERT INTO Requests (oid, cid, status)
+VALUES (1, 8, CAST(0 AS BIT));
+
+INSERT INTO Requests (oid, cid, status)
+VALUES (2, 8, CAST(0 AS BIT));
+
+INSERT INTO Requests (oid, cid, status)
+VALUES (3, 8, CAST(1 AS BIT));
+
+INSERT INTO Requests (oid, cid, status)
+VALUES (4, 8, CAST(0 AS BIT));
+
+INSERT INTO Requests (oid, cid, status)
+VALUES (5, 8, CAST(0 AS BIT));
+
+INSERT INTO Requests (oid, cid, status)
+VALUES (6, 8, CAST(0 AS BIT));
+
+INSERT INTO Requests (oid, cid, status)
+VALUES (7, 8, CAST(0 AS BIT));
+
+INSERT INTO Requests (oid, cid, status)
+VALUES (8, 8, CAST(0 AS BIT));
+
+INSERT INTO Requests (oid, cid, status)
+VALUES (9, 8, CAST(0 AS BIT));
+
+INSERT INTO Requests (oid, cid, status)
+VALUES (10, 8, CAST(0 AS BIT));
+
+INSERT INTO Requests (oid, cid, status)
+VALUES (1, 9, CAST(0 AS BIT));
+
+INSERT INTO Requests (oid, cid, status)
+VALUES (2, 9, CAST(1 AS BIT));
+
+INSERT INTO Requests (oid, cid, status)
+VALUES (3, 9, CAST(0 AS BIT));
+
+INSERT INTO Requests (oid, cid, status)
+VALUES (4, 9, CAST(0 AS BIT));
+
+INSERT INTO Requests (oid, cid, status)
+VALUES (5, 9, CAST(0 AS BIT));
+
+INSERT INTO Requests (oid, cid, status)
+VALUES (6, 9, CAST(0 AS BIT));
+
+INSERT INTO Requests (oid, cid, status)
+VALUES (7, 9, CAST(0 AS BIT));
+
+INSERT INTO Requests (oid, cid, status)
+VALUES (8, 9, CAST(0 AS BIT));
+
+INSERT INTO Requests (oid, cid, status)
+VALUES (9, 9, CAST(0 AS BIT));
+
+INSERT INTO Requests (oid, cid, status)
+VALUES (10, 9, CAST(0 AS BIT));
+
+INSERT INTO Requests (oid, cid, status)
+VALUES (1, 10, CAST(1 AS BIT));
+
+INSERT INTO Requests (oid, cid, status)
+VALUES (2, 10, CAST(0 AS BIT));
+
+INSERT INTO Requests (oid, cid, status)
+VALUES (3, 10, CAST(0 AS BIT));
+
+INSERT INTO Requests (oid, cid, status)
+VALUES (4, 10, CAST(0 AS BIT));
+
+INSERT INTO Requests (oid, cid, status)
+VALUES (5, 10, CAST(0 AS BIT));
+
+INSERT INTO Requests (oid, cid, status)
+VALUES (6, 10, CAST(0 AS BIT));
+
+INSERT INTO Requests (oid, cid, status)
+VALUES (7, 10, CAST(0 AS BIT));
+
+INSERT INTO Requests (oid, cid, status)
+VALUES (8, 10, CAST(0 AS BIT));
+
+INSERT INTO Requests (oid, cid, status)
+VALUES (9, 10, CAST(0 AS BIT));
+
+INSERT INTO Requests (oid, cid, status)
+VALUES (10, 10, CAST(0 AS BIT));
