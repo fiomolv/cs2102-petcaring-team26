@@ -1,0 +1,164 @@
+@import url('https://fonts.googleapis.com/css?family=Fredoka+One');
+@import url('https://fonts.googleapis.com/css?family=Karla|Lora');
+
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    color: #232028;
+    /*background: transparent;*/
+}
+
+body {
+	font-family: 'Lora', serif;
+}
+
+.wrapper {
+	width: 90%;
+	margin: 0 auto;
+}
+
+.content {
+	padding: 30px;
+}
+
+h1 { font-size: 2em; }
+h2 { font-size: 1.5em; }
+h3 { font-size: 1.17em; }
+h4 { font-size: 1.12em; }
+h5 { font-size: .83em; }
+h6 { font-size: .75em; }
+
+a {
+	text-decoration: none;
+	color: #37323E;
+}
+
+h1 {
+	font-family: 'Fredoka One', cursive;
+}
+
+h2 {
+	font-family: 'Karla', sans-serif;
+}
+
+.highlight {
+	background-image: linear-gradient(to right, transparent 50%, #f5cbad 50%);
+    background-size: 0% 52%;
+    background-repeat: repeat-x;
+    background-position: -100% 100%;
+}
+
+.intro {
+	height: 100vh;
+	background-image: url("img/dog.jpg");
+    background-repeat: repeat-y;
+ 	background-color: #6D6A75;
+}
+
+.intro .content {
+	text-align: center;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-80%, -50%);
+	background-color: white;
+	border: 10px solid #6D6A75;
+}
+
+.intro .content .title {
+	font-size: 60px;
+	color: #232028;
+}
+
+.intro .content .subtitle {
+	margin-top: 40px;
+	font-size: 35px;
+}
+
+.intro .content .subtitle .split {
+	font-style: italic;
+}
+
+.subtitle a:hover .highlight {
+    background-size: 200% 50%; 
+}
+
+.petowner, .caretaker {
+	height: 100vh;
+}
+
+.petowner {
+	background-color: #BFBDC1;
+}
+
+.petowner .form {
+	margin-top: 10px;
+}
+
+.petowner input[type=submit] {
+	padding: 5px;
+	border: 2px solid #B06749;
+	color: #B06749;
+	margin-top: 10px;
+}
+
+.petowner input[type=submit]:hover {
+	background-color: #B06749;
+	color: white;
+}
+
+input[type=text] {
+	padding: 5px;
+}
+
+form {
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+.caretaker {
+	background-color: #D77D59;
+}
+
+.caretaker .form {
+	margin-top: 10px;
+}
+
+.caretaker input[type=submit] {
+	padding: 5px;
+	border: 2px solid #37323E;
+	color: #37323E;
+	margin-top: 10px;
+}
+
+.caretaker input[type=submit]:hover {
+	background-color: #37323E;
+	color: white;
+}
+
+.search {
+	background-color: #92A593;
+}
+
+.search .form {
+	margin-top: 10px;
+}
+
+.search input[type=submit] {
+	padding: 5px;
+	border: 2px solid #DE9E36;
+	color: #DE9E36;
+	margin-top: 10px;
+}
+
+.search input[type=submit]:hover {
+	background-color: #DE9E36;
+	color: white;
+}
+
+
+
