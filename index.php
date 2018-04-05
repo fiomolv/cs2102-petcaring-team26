@@ -30,7 +30,19 @@
           </ul>
           <?php
           $db     = pg_connect("host=localhost port=5432 dbname=Project1 user=postgres password=26"); 
-          $ownerIDResult = pg_query($db, "SELECT * FROM owners where oid = '$_POST[oid]'");   
+          $ownerIDResult = pg_query($db, 
+            "SELECT 
+              R.oid AS oid, 
+              R.oname AS oname, 
+              R.contactnumber AS contactnumber, 
+              R.bid AS bid, 
+              P.pid AS pid, 
+              P.pname AS pname, 
+              P.pkind AS pkind
+             FROM owners R, owns O, pets P 
+             WHERE R.oid = '$_POST[oid]'
+             AND R.oid = O.oid
+             AND O.pid = P.pid");   
           $ownerIDRow    = pg_fetch_assoc($ownerIDResult);
 
           if (isset($_POST['submit1'])) {
@@ -39,21 +51,39 @@
             <li><input type='text' name='oid_updated' value='$ownerIDRow[oid]' /></li>  
             <li>Owner Name:</li>  
             <li><input type='text' name='oname_updated' value='$ownerIDRow[oname]' /></li>  
+            <li>Pet ID:</li>  
+            <li><input type='text' name='pid_updated' value='$ownerIDRow[pid]' /></li>  
             <li>Pet kind:</li>  
             <li><input type='text' name='pkind_updated' value='$ownerIDRow[pkind]' /></li>  
-            <li>Pet Name:</li><li><input type='text' name='pname_updated' value='$ownerIDRow[pname]' /></li> 
-            <li>Contact number:</li><li><input type='text' name='contact_updated' value='$ownerIDRow[contactnumber]' /></li> 
-            <li><input type='submit' name='new1' /></li>  
+            <li>Pet Name:</li>
+            <li><input type='text' name='pname_updated' value='$ownerIDRow[pname]' /></li> 
+            <li>Contact number:</li>
+            <li><input type='text' name='contact_updated' value='$ownerIDRow[contactnumber]' /></li> 
+            <li>Bid Points:</li>
+            <li><input type='text' name='bid_updated' value='$ownerIDRow[bid]' /></li> 
+            <li><input type='submit' name='new1' />
+            </li>  
           </form>  
         </ul>";
       } 
       if (isset($_POST['new1'])) {
-        echo "Yes, in ID ";
-        $ownerIDResult = pg_query($db, "UPDATE Owners SET oname = '$_POST[oname_updated]', pkind = '$_POST[pkind_updated]', pname = '$_POST[pname_updated]', contactnumber = '$_POST[contact_updated]' where oid = CAST ('$_POST[oid]' AS INTEGER)");
-        if (!$ownerIDResult) {
-          echo "Update failed!!";
+        $ownerIDResult = pg_query($db, 
+          "UPDATE Owners 
+           SET oname = '$_POST[oname_updated]', contactnumber = '$_POST[contact_updated]',  bid = '$_POST[bid_updated]' 
+           WHERE oid = '$_POST[oid_updated]' ");
+        
+        $petIDResult = pg_query($db, 
+          "UPDATE Pets 
+           SET pname = '$_POST[pname_updated]', pkind = '$_POST[pkind_updated]' 
+           WHERE pid in 
+             (SELECT pid 
+              FROM owns 
+              WHERE oid = '$_POST[oid_updated]')
+              AND pid = '$_POST[pid_updated]'");
+        if ($petIDResult && $ownerIDResult) {
+          echo "Update Successfully!!";
         } else {
-          echo "Update successful!";
+          echo "Update Fail!";
         }
       } 
       ?> 
@@ -66,7 +96,19 @@
       </ul>
       <?php
       $db     = pg_connect("host=localhost port=5432 dbname=Project1 user=postgres password=26"); 
-      $ownerNameResult = pg_query($db, "SELECT * FROM owners where oname = '$_POST[oname]'"); 
+      $ownerNameResult = pg_query($db, 
+        "SELECT 
+          R.oid AS oid, 
+          R.oname AS oname, 
+          R.contactnumber AS contactnumber, 
+          R.bid AS bid, 
+          P.pid AS pid, 
+          P.pname AS pname, 
+          P.pkind AS pkind
+          FROM owners R, owns O, pets P 
+          WHERE R.oname = '$_POST[oname]'
+          AND R.oid = O.oid
+          AND O.pid = P.pid"); 
       $ownerNameRow    = pg_fetch_assoc($ownerNameResult);
 
       if (isset($_POST['submit2'])) {
@@ -74,23 +116,38 @@
        <li>Owner ID:</li>  
        <li><input type='text' name='oid_updated' value='$ownerNameRow[oid]' /></li>  
        <li>Owner Name:</li>  
-       <li><input type='text' name='oname_updated' value='$ownerNameRow[oname]' /></li>  
+       <li><input type='text' name='oname_updated' value='$ownerNameRow[oname]' /></li> 
+       <li>Pet ID:</li>  
+       <li><input type='text' name='pid_updated' value='$ownerNameRow[pid]' /></li>  
        <li>Pet kind:</li>  
        <li><input type='text' name='pkind_updated' value='$ownerNameRow[pkind]' /></li>  
-       <li>Pet Name:</li><li><input type='text' name='pname_updated' value='$ownerNameRow[pname]' /></li> 
-       <li>Contact number:</li><li><input type='text' name='contact_updated' value='$ownerNameRow[contactnumber]' /></li> 
+       <li>Pet Name:</li>
+       <li><input type='text' name='pname_updated' value='$ownerNameRow[pname]' /></li> 
+       <li>Contact number:</li>
+       <li><input type='text' name='contact_updated' value='$ownerNameRow[contactnumber]' /></li> 
+       <li>Bid Points:</li>
+       <li><input type='text' name='bid_updated' value='$ownerNameRow[bid]' /></li> 
        <li><input type='submit' name='new2' /></li>  
            </form>  
          </ul>";
        }
 
        if (isset($_POST['new2'])) {
-        echo "Yes, in Name";
-        $ownerNameResult = pg_query($db, "UPDATE Owners SET oid = '$_POST[oid_updated]', oname = '$_POST[oname_updated]', pkind = '$_POST[pkind_updated]', pname = '$_POST[pname_updated]', contactnumber = '$_POST[contact_updated]' where oname = '$ownerNameRow[oid]' ");
-        if (!$ownerNameResult) {
-          echo "Update failed!!";
+        $ownerNameResult = pg_query($db, "UPDATE Owners SET oname = '$_POST[oname_updated]', contactnumber = '$_POST[contact_updated]', bid = '$_POST[bid_updated]' where oname = '$_POST[oname_updated]' ");
+
+        $petNameResult = pg_query($db, "
+          UPDATE Pets 
+          SET pname = '$_POST[pname_updated]', pkind = '$_POST[pkind_updated]' 
+          WHERE pid in 
+            (SELECT O.pid 
+            FROM Owns O, Owners R 
+            WHERE R.oname = '$_POST[oname_updated]' 
+            AND O.oid = R.oid)");
+
+        if ($petNameResult) {
+          echo "Update Successfully!!";
         } else {
-          echo "Update successful!";
+          echo "Update Fail";
         }
       }
       ?>   
@@ -136,8 +193,10 @@
           } 
 
         if (isset($_POST['new3'])) {  // Submit the update SQL command
-          echo "Yes, ID ";
-          $careIDResult = pg_query($db, "UPDATE caretakers SET cid = '$_POST[cid_updated]', cname = '$_POST[cname_updated]', pkind = '$_POST[pkind_updated]', startdate = '$_POST[start_updated]', enddate = '$_POST[end_updated]', contactnumber = '$_POST[contact_updated]', pkind = '$_POST[pkind_updated]' where cid = '$careIDRow[cid]'");
+
+          $careIDResult = pg_query($db, "
+            UPDATE caretakers 
+            SET cname = '$_POST[cname_updated]', startdate = '$_POST[start_updated]', enddate = '$_POST[end_updated]', contactnumber = '$_POST[contact_updated]', pkind = '$_POST[pkind_updated]' where cid = '$_POST[cid_updated]'");
           if (!$careIDResult) {
             echo "Update failed!!";
           } else {
@@ -179,8 +238,7 @@
       }
 
       if (isset($_POST['new4'])) {
-        echo "Yes, Name ";
-        $careNameResult = pg_query($db, "UPDATE caretakers SET cid = '$_POST[cid_updated]', cname = '$_POST[cname_updated]', pkind = '$_POST[pkind_updated]', startdate = '$_POST[start_updated]', enddate = '$_POST[end_updated]', pkind = '$_POST[pkind_updated]', contactnumber = '$_POST[contact_updated]' where cname = '$careIDRow[cname]'");
+        $careNameResult = pg_query($db, "UPDATE caretakers SET cname = '$_POST[cname_updated]', startdate = '$_POST[start_updated]', enddate = '$_POST[end_updated]', pkind = '$_POST[pkind_updated]', contactnumber = '$_POST[contact_updated]' where cname = '$_POST[cname_updated]'");
         if (!$careNameResult) {
           echo "Update failed!!";
         } else {

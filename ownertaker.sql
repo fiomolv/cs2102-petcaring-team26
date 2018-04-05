@@ -1,46 +1,119 @@
-DROP TABLE IF EXISTS Owners;
-DROP TABLE IF EXISTS Caretakers;
-DROP TABLE IF EXISTS Requests;
+DROP TABLE IF EXISTS Owners, Caretakers, Requests;
 
 -- Owner table:
 CREATE TABLE Owners (
 	oid INTEGER,
 	oname VARCHAR(10),
-	pkind VARCHAR(10),
-	pname VARCHAR(10),
 	contactNumber VARCHAR(10),
+	bid INTEGER,
 	PRIMARY KEY (oid)
 );
 
-INSERT INTO Owners (oid, oname, pkind, pname, contactNumber)
-VALUES (1, 'Alice', 'Eskimo', 'Bella', '81239456');
+INSERT INTO Owners (oid, oname, contactNumber, bid)
+VALUES (1, 'Alice', '81239456', 20);
 
-INSERT INTO Owners (oid, oname, pkind, pname, contactNumber)
-VALUES (2, 'Bob', 'Bulldog', 'Max', '84327543');
+INSERT INTO Owners (oid, oname, contactNumber, bid)
+VALUES (2, 'Bob', '84327543', 30);
 
-INSERT INTO Owners (oid, oname, pkind, pname, contactNumber)
-VALUES (3, 'Charles', 'Akita', 'Chole', '83736485');
+INSERT INTO Owners (oid, oname, contactNumber, bid)
+VALUES (3, 'Charles', '83736485', 10);
 
-INSERT INTO Owners (oid, oname, pkind, pname, contactNumber)
-VALUES (4, 'Dekins', 'Malamute', 'Sophie', '88753345');
+INSERT INTO Owners (oid, oname, contactNumber, bid)
+VALUES (4, 'Dekins', '88753345', 40);
 
-INSERT INTO Owners (oid, oname, pkind, pname, contactNumber)
-VALUES (5, 'Emily', 'Cannan', 'Toby', '92637655');
+INSERT INTO Owners (oid, oname, contactNumber, bid)
+VALUES (5, 'Emily', '92637655', 70);
 
-INSERT INTO Owners (oid, oname, pkind, pname, contactNumber)
-VALUES (6, 'Frod', 'Cocker', 'Bailey', '87769425');
+INSERT INTO Owners (oid, oname, contactNumber, bid)
+VALUES (6, 'Frod', '87769425', 60);
 
-INSERT INTO Owners (oid, oname, pkind, pname,contactNumber)
-VALUES (7, 'George', 'Spitz', 'Duke', '89975556');
+INSERT INTO Owners (oid, oname, contactNumber, bid)
+VALUES (7, 'George', '89975556', 55);
 
-INSERT INTO Owners (oid, oname, pkind, pname, contactNumber)
-VALUES (8, 'Henrry', 'Pinscher', 'Cooper', '99764456');
+INSERT INTO Owners (oid, oname, contactNumber, bid)
+VALUES (8, 'Henrry', '99764456', 78);
 
-INSERT INTO Owners (oid, oname, pkind, pname, contactNumber)
-VALUES (9,'Junia', 'Harrier', 'Gracie', '99874263');
+INSERT INTO Owners (oid, oname, contactNumber, bid)
+VALUES (9, 'Junia', '99874263', 67);
 
-INSERT INTO Owners (oid, oname, pkind, pname, contactNumber)
-VALUES (10, 'Kelly', 'Keeshond', 'Murphy','92351167');
+INSERT INTO Owners (oid, oname, contactNumber, bid)
+VALUES (10, 'Kelly', '92351167', 34);
+
+-- Pets table
+CREATE TABLE Pets (
+	pid INTEGER,
+	pkind VARCHAR(50),
+	pname VARCHAR(50),
+	PRIMARY KEY (pid)
+);
+
+INSERT INTO Pets (pid, pkind, pname)
+VALUES (1, 'Eskimo', 'Bella');
+
+INSERT INTO Pets (pid, pkind, pname)
+VALUES (2, 'Bulldog', 'Max');
+
+INSERT INTO Pets (pid, pkind, pname)
+VALUES (3, 'Akita', 'Chole');
+
+INSERT INTO Pets (pid, pkind, pname)
+VALUES (4, 'Malamute', 'Sophie');
+
+INSERT INTO Pets (pid, pkind, pname)
+VALUES (5, 'Cannan', 'Max');
+
+INSERT INTO Pets (pid, pkind, pname)
+VALUES (6, 'Cocker', 'Baily');
+
+INSERT INTO Pets (pid, pkind, pname)
+VALUES (7, 'Pincer', 'Duke');
+
+INSERT INTO Pets (pid, pkind, pname)
+VALUES (8, 'Cocker', 'Cooker');
+
+INSERT INTO Pets (pid, pkind, pname)
+VALUES (9, 'Harrier', 'Gracier');
+
+INSERT INTO Pets (pid, pkind, pname)
+VALUES (10, 'Keeshond', 'Murphy');
+
+CREATE TABLE Owns (
+pid INTEGER,
+oid INTEGER,
+PRIMARY KEY (pid, oid),
+FOREIGN KEY (pid) REFERENCES Pets(pid),
+FOREIGN KEY (oid) REFERENCES Owners(oid)
+);
+
+INSERT INTO Owns (oid, pid)
+VALUES (1, 1);
+
+INSERT INTO Owns (oid, pid)
+VALUES (2, 2);
+
+INSERT INTO Owns (oid, pid)
+VALUES (3, 3);
+
+INSERT INTO Owns (oid, pid)
+VALUES (4, 4);
+
+INSERT INTO Owns (oid, pid)
+VALUES (5, 5);
+
+INSERT INTO Owns (oid, pid)
+VALUES (6, 6);
+
+INSERT INTO Owns (oid, pid)
+VALUES (7, 7);
+
+INSERT INTO Owns (oid, pid)
+VALUES (8, 8);
+
+INSERT INTO Owns (oid, pid)
+VALUES (9, 9);
+
+INSERT INTO Owns (oid, pid)
+VALUES (10, 10);
 
 -- Care taker table
 CREATE TABLE Caretakers (
