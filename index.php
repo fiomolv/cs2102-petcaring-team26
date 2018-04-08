@@ -35,7 +35,6 @@
               R.oid AS oid, 
               R.oname AS oname, 
               R.contactnumber AS contactnumber, 
-              R.bid AS bid, 
               P.pid AS pid, 
               P.pname AS pname, 
               P.pkind AS pkind
@@ -59,8 +58,6 @@
             <li><input type='text' name='pname_updated' value='$ownerIDRow[pname]' /></li> 
             <li>Contact number:</li>
             <li><input type='text' name='contact_updated' value='$ownerIDRow[contactnumber]' /></li> 
-            <li>Bid Points:</li>
-            <li><input type='text' name='bid_updated' value='$ownerIDRow[bid]' /></li> 
             <li><input type='submit' name='new1' />
             </li>  
           </form>  
@@ -69,7 +66,7 @@
       if (isset($_POST['new1'])) {
         $ownerIDResult = pg_query($db, 
           "UPDATE Owners 
-           SET oname = '$_POST[oname_updated]', contactnumber = '$_POST[contact_updated]',  bid = '$_POST[bid_updated]' 
+           SET oname = '$_POST[oname_updated]', contactnumber = '$_POST[contact_updated]'
            WHERE oid = '$_POST[oid_updated]' ");
         
         $petIDResult = pg_query($db, 
@@ -83,7 +80,7 @@
         if ($petIDResult && $ownerIDResult) {
           echo "Update Successfully!!";
         } else {
-          echo "Update Fail!";
+          echo "Update Fail! You cannot change your owner ID";
         }
       } 
       ?> 
@@ -101,7 +98,6 @@
           R.oid AS oid, 
           R.oname AS oname, 
           R.contactnumber AS contactnumber, 
-          R.bid AS bid, 
           P.pid AS pid, 
           P.pname AS pname, 
           P.pkind AS pkind
@@ -125,15 +121,13 @@
        <li><input type='text' name='pname_updated' value='$ownerNameRow[pname]' /></li> 
        <li>Contact number:</li>
        <li><input type='text' name='contact_updated' value='$ownerNameRow[contactnumber]' /></li> 
-       <li>Bid Points:</li>
-       <li><input type='text' name='bid_updated' value='$ownerNameRow[bid]' /></li> 
        <li><input type='submit' name='new2' /></li>  
            </form>  
          </ul>";
        }
 
        if (isset($_POST['new2'])) {
-        $ownerNameResult = pg_query($db, "UPDATE Owners SET oname = '$_POST[oname_updated]', contactnumber = '$_POST[contact_updated]', bid = '$_POST[bid_updated]' where oname = '$_POST[oname_updated]' ");
+        $ownerNameResult = pg_query($db, "UPDATE Owners SET  contactnumber = '$_POST[contact_updated]' where oname = '$_POST[oname_updated]' ");
 
         $petNameResult = pg_query($db, "
           UPDATE Pets 
@@ -144,14 +138,67 @@
             WHERE R.oname = '$_POST[oname_updated]' 
             AND O.oid = R.oid)");
 
-        if ($petNameResult) {
+        if ($petNameResult && $ownerNameResult) {
           echo "Update Successfully!!";
         } else {
-          echo "Update Fail";
+          echo "Update Fail! Please update name using your owner ID";
         }
       }
       ?>   
-
+       
+       <h2> Search for a Care Taker</h2>
+    <ul>
+       <form name="searchTaker" action="index.php" method="POST">
+          <li>Pet kind</li>
+          <li><input type="text" name="pkindsearch" /></li>
+          <li><input type="submit" name="submiting"/></li>
+       </form>
+    </ul>
+    <?php
+      $db = pg_connect("host=localhost port=5432 dbname=Project1 user=postgres password=26");
+      $result1 = pg_query($db, "SELECT * FROM caretakers where pkind = '$_POST[pkindsearch]'");   
+      if ($result1) {
+         while ($careRow = pg_fetch_assoc($result1)) {
+          echo 
+            "<ul>
+              <form name='result1' action='index.php' method='GET' >  
+                <li>Care Taker ID: $careRow[cid]</li>  
+                <li>Care Taker Name: $careRow[cname]</li>  
+                <li>Start Date: $careRow[startdate]</li> 
+                <li>End Date: $careRow[enddate]</li> 
+                <li>Pet kind: $careRow[pkind]</li>  
+                <li>Contact number: $careRow[contactnumber]</li> 
+                <li></li>
+              </form>  
+            </ul>";
+         }
+      } else {
+         echo "No such caretaker";
+      }
+    ?>
+       <h2>Send a request: enter oid and cid</h2>  
+    <ul>
+      <form name="insert" action="index.php" method="POST" >
+        <li>OID (owner id):</li>
+        <li><input type="text" name="oid" /></li>
+        <li>CID (CareTaker id):</li>
+        <li><input type="text" name="cid" /></li>
+        <li>Bid Point:</li>
+        <li><input type="text" name="bid" /></li>
+        <li><input type="submit" name="submitRequest"/></li>
+      </form>
+    </ul>
+    <?php
+      $db = pg_connect("host=localhost port=5432 dbname=Project1 user=postgres password=26"); 
+      if (isset($_POST['submitRequest'])) {
+        $result = pg_query($db, "INSERT INTO requests (oid, cid, bid, status) VALUES ('$_POST[oid]', '$_POST[cid]'), '$_POST[bid]', CAST(0 AS BIT)"); 
+        if (!$result) {
+            echo "Request failed, you have sent this request before";
+        } else {
+            echo "Request successful!";
+        }
+      }   
+    ?>
       </div>
       </div>
       </div>
@@ -245,36 +292,9 @@
           echo "Update successful!";
         }
       }
-      ?>  
-      </div>
-    </div>
-  </div>
+      ?> 
 
-  <div class="search">
-    <div class="wrapper">
-      <div class="content">
-          <h2>Send a request: enter oid and cid</h2>  
-    <ul>
-      <form name="insert" action="index.php" method="POST" >
-        <li>OID (owner id):</li>
-        <li><input type="text" name="oid" /></li>
-        <li>CID (CareTaker id):</li>
-        <li><input type="text" name="cid" /></li>
-        <li><input type="submit" name="submitRequest"/></li>
-      </form>
-    </ul>
-    <?php
-      $db = pg_connect("host=localhost port=5432 dbname=Project1 user=postgres password=26"); 
-      if (isset($_POST['submitRequest'])) {
-        $result = pg_query($db, "INSERT INTO requests (oid, cid) VALUES ('$_POST[oid]', '$_POST[cid]')"); 
-        if (!$result) {
-            echo "Request failed!!";
-        } else {
-            echo "Request successful!";
-        }
-      }   
-    ?>
-    <h2>Search a request: enter cid</h2>  
+       <h2>Search a request: enter cid</h2>  
     <ul>
       <form name="insert" action="index.php" method="POST" >
         <li>CID (CareTaker id):</li>
@@ -294,7 +314,8 @@
         }
         echo "<ul><form name='showRequest' action='index.php' method='POST' >  
       <li>Requester OID: $row[oid]</li>  
-      <li>CID: $row[cid]</li>  
+      <li>CID: $row[cid]</li> 
+      <li>Bid Points: $row[bid]</li> 
       <li>Request Status: $status</li>   
       </form>  
       </ul>";
@@ -317,11 +338,10 @@
             echo "Accept request successful!";
         }
     }
-    ?>
+    ?> 
       </div>
     </div>
   </div>
-
  
     
 </body>
