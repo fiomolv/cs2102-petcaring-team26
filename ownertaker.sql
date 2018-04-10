@@ -116,7 +116,7 @@ VALUES (10, 10);
 
 -- Care taker table
 CREATE TABLE Caretakers (
-	cid INTEGER UNIQUE,
+	cid INTEGER,
 	cname VARCHAR(10),
 	startdate DATE,
 	enddate DATE,
