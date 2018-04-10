@@ -4,6 +4,9 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <link rel="stylesheet" type="text/css" href="style.css">
   <style>li {list-style: none;}</style>
+  <link rel="icon" 
+      type="image/png" 
+      href="img/favicon.png">
 </head>
 
 <body>
@@ -13,6 +16,13 @@
         <h1 class="title">WELCOME TO THE CRATE ESCAPE!</h1>
         <h2 class="subtitle">Are you a <a href="#caretaker"><span class="split highlight">caretaker</span></a> or <a href="#petowner"><span class="split highlight">pet owner</span></a>?</h2>
       </div>
+<!--       <nav class="main-menu">  
+                <ul>
+                    <li>LOGIN</li>
+                    <li><a href="#facts"><span class="highlight">the facts</span></a></li>
+                    <li><a href="developer.html#about"><span class="highlight">the developer</span></a></li>
+                </ul>
+            </nav> -->
     </div>
   </div>
 

@@ -52,6 +52,8 @@ h2 {
     background-position: -100% 100%;
 }
 
+/*HERO + NAV*/
+
 .intro {
 	height: 100vh;
 	background-image: url("img/dog.jpg");
@@ -86,6 +88,31 @@ h2 {
 .subtitle a:hover .highlight {
     background-size: 200% 50%; 
 }
+
+/*.intro .main-menu {
+	background-color: white;
+	width: auto;
+	position: absolute;
+	right: 0;
+	top: 100px; }
+	.intro .main-menu ul {
+		list-style: none;
+		padding: 30px;
+		margin: 0px; }
+		.intro .main-menu ul li {
+			font-size: 40px;
+			font-family: 'sofiaprobold';
+			padding-top: 10px; }
+			.intro .main-menu ul li a {
+				text-decoration: none;
+				color: #252239; }
+				.intro .main-menu ul li a:hover {
+					cursor: pointer; }
+					.intro .main-menu ul li a:hover .highlight {
+						background-size: 200% 50%; }
+*/
+
+ /*PETOWNER + CARETAKER*/
 
 .petowner, .caretaker {
 	height: 100vh;
@@ -160,5 +187,21 @@ form {
 	color: white;
 }
 
+
+/*RESPONSIVE*/
+@media only screen and (max-width: 1000px) {
+	.intro .content {
+		transform: translate(-50%, -50%);
+		border: 10px solid #6D6A75;
+	}
+
+	.intro .content .title {
+		font-size: 40px;
+	}
+
+	.intro .content .subtitle {
+		font-size: 20px;
+	}
+}
 
 
