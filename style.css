@@ -57,7 +57,7 @@ h2 {
 .intro {
 	height: 100vh;
 	background-image: url("img/dog.jpg");
-    background-repeat: repeat-y;
+    background-repeat: repeat-x;
  	background-color: #6D6A75;
 }
 
@@ -66,7 +66,7 @@ h2 {
 	position: absolute;
 	top: 50%;
 	left: 50%;
-	transform: translate(-80%, -50%);
+	transform: translate(-50%, -50%);
 	background-color: white;
 	border: 10px solid #6D6A75;
 }
@@ -115,7 +115,8 @@ h2 {
  /*PETOWNER + CARETAKER*/
 
 .petowner, .caretaker {
-	height: 100vh;
+	height: 100%;
+	min-height: 100vh;
 }
 
 .petowner {
@@ -159,7 +160,6 @@ form {
 	padding: 5px;
 	border: 2px solid #37323E;
 	color: #37323E;
-	margin-top: 10px;
 }
 
 .caretaker input[type=submit]:hover {
@@ -167,9 +167,9 @@ form {
 	color: white;
 }
 
-.search {
+/*.search {
 	background-color: #92A593;
-}
+}*/
 
 .search .form {
 	margin-top: 10px;
@@ -179,7 +179,6 @@ form {
 	padding: 5px;
 	border: 2px solid #DE9E36;
 	color: #DE9E36;
-	margin-top: 10px;
 }
 
 .search input[type=submit]:hover {
@@ -187,11 +186,54 @@ form {
 	color: white;
 }
 
+.section .login {
+	display: flex;
+}
+
+.section .search {
+	display: flex;
+}
+
+.section .content {
+	flex-direction: row;
+}
+
+.section .content h3 {
+	font-family: 'Karla', sans-serif;
+	font-size: 3em; 
+	margin-bottom: 40px;
+}
+
+.section .content .highlight {
+	background-size: 200% 50%;
+}
+
+.section .search .search-sub {
+	flex-direction: column;
+	margin: 10px;
+}
+
+form li input[type=text] {
+	margin-bottom: 10px;
+}
+
+.login .form {
+	width: 33.333%;
+}
+
+.login .search {
+	width: 66.666%;
+}
+
+.login .search .search-sub {
+	width: 50%;
+}
+
+
 
 /*RESPONSIVE*/
 @media only screen and (max-width: 1000px) {
 	.intro .content {
-		transform: translate(-50%, -50%);
 		border: 10px solid #6D6A75;
 	}
 
@@ -201,6 +243,21 @@ form {
 
 	.intro .content .subtitle {
 		font-size: 20px;
+	}
+
+	.section .search {
+		margin-left: 0px;
+	}
+}
+
+@media only screen and (max-width: 700px) {
+	.section .content,.search,.login {
+		flex-direction: column;
+	}
+
+	.section .search .search-sub {
+		margin: 0px;
+		margin-top: 20px;
 	}
 }
 
