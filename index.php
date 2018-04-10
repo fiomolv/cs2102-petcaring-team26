@@ -57,7 +57,7 @@
                     $ownerIDRow    = pg_fetch_assoc($ownerIDResult);
 
                     if (isset($_POST['submit1'])) {
-                      echo "<ul><form name='update1' action='index.php' method='POST' >  
+                      echo "<ul><form name='update1' action='index.php#petowner' method='POST' >  
                       <li>Owner ID:</li>  
                       <li><input type='text' name='oid_updated' value='$ownerIDRow[oid]' /></li>  
                       <li>Owner Name:</li>  
@@ -120,7 +120,7 @@
                 $ownerNameRow    = pg_fetch_assoc($ownerNameResult);
 
                 if (isset($_POST['submit2'])) {
-                 echo "<ul><form name='update2' action='index.php' method='POST' >  
+                 echo "<ul><form name='update2' action='index.php#petowner' method='POST' >  
                  <li>Owner ID:</li>  
                  <li><input type='text' name='oid_updated' value='$ownerNameRow[oid]' /></li>  
                  <li>Owner Name:</li>  
@@ -160,7 +160,7 @@
         </div>
         <div class="search">
           <div class="search-sub">
-            <h2> Look for a caretaker</h2>
+            <h2> Search for a caretaker</h2>
             <ul>
               <form name="searchTaker" action="index.php#petowner" method="POST">
                 <li>Pet kind</li>
@@ -175,7 +175,7 @@
               while ($careRow = pg_fetch_assoc($result1)) {
                 echo 
                 "<ul>
-                  <form name='result1' action='index.php' method='GET' >  
+                  <form name='result1' action='index.php#petowner' method='GET' >  
                     <li>Care Taker ID: $careRow[cid]</li>  
                     <li>Care Taker Name: $careRow[cname]</li>  
                     <li>Start Date: $careRow[startdate]</li> 
@@ -208,7 +208,7 @@
             <?php
             $db = pg_connect("host=localhost port=5432 dbname=Project1 user=postgres password=26"); 
             if (isset($_POST['submitRequest'])) {
-            $result = pg_query($db, "INSERT INTO requests (oid, cid, bid, status) VALUES ('$_POST[oid]', '$_POST[cid]'), '$_POST[bid]', CAST(0 AS BIT)"); 
+            $result = pg_query($db, "INSERT INTO requests (oid, cid, bid, status) VALUES ('$_POST[oid]', '$_POST[cid]', '$_POST[bid]', CAST(0 AS BIT))"); 
             if (!$result) {
               echo "Request failed, you have sent this request before";
             } else {
@@ -226,7 +226,7 @@
 <div class="caretaker section" id="caretaker">
   <div class="wrapper">
     <div class="content">
-        <h3><span class="highlight">Hi, so you're a caretaker?</span></h3>
+        <h3><span class="highlight">Hi, so you're a care taker?</span></h3>
       <div class="login">
       <div class="form">
         <h2>Update your information</h2>
@@ -243,7 +243,7 @@
         $careIDRow    = pg_fetch_assoc($careIDResult);
 
         if (isset($_POST['submit3'])) {
-          echo "<ul><form name='update3' action='index.php' method='POST' >  
+          echo "<ul><form name='update3' action='index.php#caretaker' method='POST' >  
                   <li>Care Taker ID:</li>  
                   <li><input type='text' name='cid_updated' value='$careIDRow[cid]' /></li>  
                   <li>Care Taker Name:</li>  
@@ -288,7 +288,7 @@
         $careNameRow    = pg_fetch_assoc($careNameResult);
 
         if (isset($_POST['submit4'])) {
-          echo "<ul><form name='update4' action='index.php' method='POST' >  
+          echo "<ul><form name='update4' action='index.php#caretaker' method='POST' >  
           <li>Care Taker ID:</li>  
           <li><input type='text' name='cid_updated' value='$careNameRow[cid]' /></li>  
           <li>Care Taker Name:</li>  
@@ -321,7 +321,7 @@
       <h2>Search requests</h2>  
       <ul>
         <form name="insert" action="index.php#caretaker" method="POST" >
-          <li>CID (CareTaker id):</li>
+          <li>CID (Search for all results):</li>
           <li><input type="text" name="cidSearch" required/></li>
           <li><input type="submit" name="searchRequest"/></li>
         </form>
@@ -336,7 +336,7 @@
           } else {
             $status = "pending";
           }
-          echo "<ul><form name='showRequest' action='index.php' method='POST' >  
+          echo "<ul><form name='showRequest' action='index.php#caretaker' method='POST' >  
           <li>Requester OID: $row[oid]</li>  
           <li>CID: $row[cid]</li> 
           <li>Bid Points: $row[bid]</li> 
@@ -345,11 +345,45 @@
       </ul>";
     }
   }?>
+      <ul>
+        <form name="insert2" action="index.php#caretaker" method="POST" >
+          <li>CID (Fast Search for highest bid):</li>
+          <li><input type="text" name="cidFastSearch" required/></li>
+          <li><input type="submit" name="searchFastRequest"/></li>
+        </form>
+      </ul>
+      <?php
+      $db     = pg_connect("host=localhost port=5432 dbname=Project1 user=postgres password=26"); 
+      $result = pg_query($db, 
+        "SELECT *
+         FROM requests R1
+         WHERE R1.cid = '$_POST[cidFastSearch]' 
+         AND R1.bid >= ALL (
+             SELECT R2.bid
+             FROM requests R2
+             WHERE R2.cid = '$_POST[cidFastSearch]')");
+
+      if (isset($_POST['searchFastRequest'])) {
+        $row = pg_fetch_assoc($result);
+        if ($row[status] == 1) {
+          $status = "accepted";
+        } else {
+          $status = "pending";
+        }
+        echo "<ul><form name='showRequest2' action='index.php#caretaker' method='POST' >  
+          <li>Requester OID: $row[oid]</li>  
+          <li>CID: $row[cid]</li> 
+          <li>Bid Points: $row[bid]</li> 
+          <li>Request Status: $status</li>   
+        </form>  
+      </ul>";
+    }
+  ?>
   </div>
   <div class="search-sub">
   <?php
     echo "<h2>Accept a request</h2>
-    <ul><form name='acceptRequest' action='index.php' method='POST' >  
+    <ul><form name='acceptRequest' action='index.php#caretaker' method='POST' >  
       <li>Requester OID: </li>
       <li><input type='text' name='oid_update' required/></li>  
       <li>CID: </li>  
